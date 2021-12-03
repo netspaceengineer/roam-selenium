@@ -1,8 +1,10 @@
 package app.seleniumap.ui.tabs;
 
 
+import app.seleniumap.App;
 import app.seleniumap.models.test.WebEntity;
 import app.seleniumap.ui.common.UIUtil;
+import app.seleniumap.ui.dialogs.QuickObjectTestDialog;
 import app.seleniumap.ui.misc.Icons;
 import app.seleniumap.ui.misc.Theme;
 import lombok.Data;
@@ -31,6 +33,8 @@ public class WebEntityTab {
 
     private JButton btnCancel;
     private JLabel lblType;
+    private JButton btnTestObject;
+    private JButton btnRefresh;
     private String path = "";
     private int mode = 0;
     WebEntity entity;
@@ -139,7 +143,18 @@ public class WebEntityTab {
 
             }
         });
-
+        btnTestObject.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                QuickObjectTestDialog.showDialog(path, ((WebEntity) variantList.getSelectedValue()).getVariant());
+            }
+        });
+        btnRefresh.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                reactUI();
+            }
+        });
     }
 
     private void reactUI() {
@@ -147,7 +162,9 @@ public class WebEntityTab {
         btnModify.setIcon(mode == 2 ? Icons.save : Icons.modify);
         btnDelete.setIcon(Icons.delete);
         btnClone.setIcon(Icons.clone);
-
+        btnRefresh.setIcon(Icons.refresh);
+        btnTestObject.setIcon(Icons.testObject);
+        btnTestObject.setEnabled(App.webDriver != null && variantList.getSelectedIndex() >= 0 && mode == 0);
         btnCancel.setIcon(Icons.close);
         btnCancel.setVisible(mode > 0);
         btnAdd.setEnabled(mode == 0 || mode == 1);
@@ -313,6 +330,14 @@ public class WebEntityTab {
         separator1.setOrientation(1);
         separator1.setPreferredSize(new Dimension(3, 30));
         panel1.add(separator1);
+        btnTestObject = new JButton();
+        btnTestObject.setPreferredSize(new Dimension(30, 30));
+        btnTestObject.setText("");
+        panel1.add(btnTestObject);
+        btnRefresh = new JButton();
+        btnRefresh.setPreferredSize(new Dimension(30, 30));
+        btnRefresh.setText("");
+        panel1.add(btnRefresh);
         final JSplitPane splitPane1 = new JSplitPane();
         splitPane1.setDividerLocation(150);
         mainPanel.add(splitPane1, BorderLayout.CENTER);
@@ -390,4 +415,5 @@ public class WebEntityTab {
     public JComponent $$$getRootComponent$$$() {
         return mainPanel;
     }
+
 }

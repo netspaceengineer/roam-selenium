@@ -107,6 +107,7 @@ public class MainScreen {
                 if (App.webDriver == null) {
                     App.webDriver = BrowserConfig.initializeBrowser((File) cboBrowser.getSelectedItem());
                     App.webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+                    App.webDriver.manage().timeouts().scriptTimeout(Duration.ofSeconds(3));
                 } else {
                     App.webDriver.close();
                     App.webDriver.quit();
@@ -121,10 +122,10 @@ public class MainScreen {
                 TestPlanner.showDialog();
             }
         });
-        PrintStream printStream = new PrintStream(new CustomOutputStream(txtConsole));
-
-        System.setOut(printStream);
-        System.setErr(printStream);
+//        PrintStream printStream = new PrintStream(new CustomOutputStream(txtConsole));
+//
+//        System.setOut(printStream);
+//        System.setErr(printStream);
     }
 
     public void refreshUI() {
