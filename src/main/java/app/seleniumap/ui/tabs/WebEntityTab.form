@@ -2,7 +2,7 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="app.seleniumap.ui.tabs.WebEntityTab">
   <grid id="27dc6" binding="mainPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
     <constraints>
-      <xy x="20" y="20" width="592" height="400"/>
+      <xy x="20" y="20" width="511" height="400"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -56,20 +56,6 @@
             <properties>
               <orientation value="1"/>
               <preferredSize width="3" height="30"/>
-            </properties>
-          </component>
-          <component id="9da5e" class="javax.swing.JButton" binding="btnTestObject">
-            <constraints/>
-            <properties>
-              <preferredSize width="30" height="30"/>
-              <text value=""/>
-            </properties>
-          </component>
-          <component id="8ab5c" class="javax.swing.JButton" binding="btnRefresh">
-            <constraints/>
-            <properties>
-              <preferredSize width="30" height="30"/>
-              <text value=""/>
             </properties>
           </component>
         </children>
