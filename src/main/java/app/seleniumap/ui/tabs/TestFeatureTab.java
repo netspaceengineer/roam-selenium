@@ -169,7 +169,7 @@ public class TestFeatureTab {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (App.webDriver != null) {
-                    Thread t = new Thread(new StepThreadRunner((TestStep) stepList.getSelectedValue(), App.webDriver));
+                    Thread t = new Thread(new StepThreadRunner((TestStep) stepList.getSelectedValue(), App.webDriver, App.testProject.getCurrentVariant()));
                     t.run();
                 } else {
                     UIUtil.showErrorMessage(null, "Webdriver not started!", "Webdriver is not initiated or has been closed.");
@@ -441,4 +441,5 @@ public class TestFeatureTab {
     public JComponent $$$getRootComponent$$$() {
         return mainPanel;
     }
+
 }

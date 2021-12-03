@@ -22,7 +22,7 @@ public class Result {
     }
 
     public String getResult() {
-        return (isPassed ? "[PASSED]" : "[FAILED]") + " " + getStatement();
+        return (isPassed ? "[PASSED] " + getStatement()  : "[FAILED] " +(exception.length>1?"Return more than one exception!":exception[0].getMessage()))  ;
     }
 
 
