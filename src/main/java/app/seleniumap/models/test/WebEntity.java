@@ -4,7 +4,6 @@ package app.seleniumap.models.test;
 import app.seleniumap.App;
 import app.seleniumap.models.test.webentities.*;
 import app.seleniumap.ui.common.UIUtil;
-import app.seleniumap.utils.ClassUtil;
 import app.seleniumap.utils.FilesUtil;
 import lombok.Data;
 import org.json.JSONObject;
@@ -50,8 +49,7 @@ public class WebEntity {
     private String name;
     private String type;
     private String location;
-    private String path;
-    private String variant;
+
     public List<WebEntity> variants = new ArrayList<WebEntity>();
     public List<WebEntity> children = new ArrayList<WebEntity>();
     public void initialize(String path,String variant){
@@ -60,13 +58,12 @@ public class WebEntity {
         if(!target.endsWith(".json")){
             target+=".json";
         }
-        this.path = target;
         String raw = FilesUtil.readFile(target);
 
         JSONObject object = new JSONObject(raw);
         setName(object.getString(NAME));
         setType(object.getString(TYPE));
-        setVariant(variant.replace(".json",""));
+
         setLocation(object.getString(LOCATION));
 
     }
@@ -129,46 +126,26 @@ public class WebEntity {
 
         }
     }
-//
-//    public Object getEntityClass(WebDriver driver, String type){
-//        if(type.equals(TYPES.DOMAIN.toString())){
-//            return new Domain(driver, name, location);
-//        }else if(type.equals(TYPES.PAGE.toString())) {
-//            return new Page(driver, name, location);
-//        }else if(type.equals(TYPES.SECTION.toString())) {
-//            return new Section(driver, name, location);
-//        }else if(type.equals(TYPES.CLICKABLE.toString())) {
-//            return new Clickable(driver, name, location);
-//        }else if(type.equals(TYPES.CHECKBOX.toString())) {
-//            return new CheckBox(driver, name, location);
-//        }else if(type.equals(TYPES.RADIOBOX.toString())) {
-//            return new RadioButton(driver, name, location);
-//        }else if(type.equals(TYPES.DROPDOWN.toString())) {
-//            return new Dropdown(driver, name, location);
-//        }else if(type.equals(TYPES.COLLECTION.toString())) {
-//            return new Collection(driver, name, location);
-//        }
-//        return null;
-//    }
-    public List<String> getActions(){
-        Class cls = null;
-        if (type.equals(WebEntity.TYPES.DOMAIN.toString())) {
-            cls = Domain.class;
-        } else if (type.equals(WebEntity.TYPES.PAGE.toString())) {
-            cls = Page.class;
-        } else if (type.equals(WebEntity.TYPES.SECTION.toString())) {
-            cls = Section.class;
-        } else if (type.equals(WebEntity.TYPES.CLICKABLE.toString())) {
-            cls = Clickable.class;
-        } else if (type.equals(WebEntity.TYPES.TEXTBOX.toString())) {
-            cls = TextBox.class;
-        } else if (type.equals(WebEntity.TYPES.RADIOBOX.toString())) {
-            cls = RadioButton.class;
-        } else if (type.equals(WebEntity.TYPES.CHECKBOX.toString())) {
-            cls = CheckBox.class;
-        } else if (type.equals(WebEntity.TYPES.COLLECTION.toString())) {
 
+    public Object getEntityClass(WebDriver driver, String type){
+        if(type.equals(TYPES.DOMAIN.toString())){
+            return new Domain(driver, name, location);
+        }else if(type.equals(TYPES.PAGE.toString())) {
+            return new Page(driver, name, location);
+        }else if(type.equals(TYPES.SECTION.toString())) {
+            return new Section(driver, name, location);
+        }else if(type.equals(TYPES.CLICKABLE.toString())) {
+            return new Clickable(driver, name, location);
+        }else if(type.equals(TYPES.CHECKBOX.toString())) {
+            return new CheckBox(driver, name, location);
+        }else if(type.equals(TYPES.RADIOBOX.toString())) {
+            return new RadioButton(driver, name, location);
+        }else if(type.equals(TYPES.DROPDOWN.toString())) {
+            return new Dropdown(driver, name, location);
+        }else if(type.equals(TYPES.COLLECTION.toString())) {
+            return new Collection(driver, name, location);
         }
-        return ClassUtil.getEntityActions(cls);
+        return null;
     }
+
 }

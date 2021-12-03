@@ -34,7 +34,7 @@ public class TestRunner {
             TestFeature tf = new TestFeature();
             tf.initialize(App.testProject.getLocation() + "/" + f +"/" + this.variant +".json");
             for(TestStep s: tf.getSteps()){
-                Result result = new Executor(driver,s, this.variant).execute();
+                Result result = new Executor(driver,s).execute();
                 System.out.println(result.getResult());
                 assert(result.isPassed);
             }
