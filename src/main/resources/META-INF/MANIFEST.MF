@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Main-Class: app.seleniumap.App
+Main-Class: app.roam.se.App
 Class-Path: auto-common-1.2.jar opentelemetry-sdk-logs-1.9.0-alpha.jar s
  elenium-edge-driver-4.1.0.jar selenium-json-4.1.0.jar slf4j-api-1.7.30.
  jar failsafe-2.4.4.jar selenium-chrome-driver-4.1.0.jar selenium-suppor

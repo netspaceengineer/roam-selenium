@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="app.roam.se.ui.tabs.TestFeatureTab">
+  <grid id="27dc6" binding="mainPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="2131" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="62211" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+        <constraints border-constraint="North"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="9a03d" class="javax.swing.JButton" binding="btnAddVariant">
+            <constraints/>
+            <properties>
+              <preferredSize width="30" height="30"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="73a76" class="javax.swing.JButton" binding="btnRenameVariant">
+            <constraints/>
+            <properties>
+              <preferredSize width="30" height="30"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="f8eb5" class="javax.swing.JButton" binding="btnDeleteVariant">
+            <constraints/>
+            <properties>
+              <preferredSize width="30" height="30"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="feb21" class="javax.swing.JButton" binding="btnCloneVariant">
+            <constraints/>
+            <properties>
+              <preferredSize width="30" height="30"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="4b884" class="javax.swing.JSeparator">
+            <constraints/>
+            <properties>
+              <orientation value="1"/>
+              <preferredSize width="3" height="30"/>
+            </properties>
+          </component>
+          <component id="4ae65" class="javax.swing.JButton" binding="btnPlaySteps">
+            <constraints/>
+            <properties>
+              <preferredSize width="30" height="30"/>
+              <text value=""/>
+              <visible value="false"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <splitpane id="fa4ad">
+        <constraints border-constraint="Center"/>
+        <properties>
+          <continuousLayout value="false"/>
+          <dividerLocation value="150"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <grid id="36ce2" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints>
+              <splitpane position="right"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <grid id="185fa" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                <constraints border-constraint="East"/>
+                <properties>
+                  <preferredSize width="35" height="35"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="afef0" class="javax.swing.JButton" binding="btnAddStep">
+                    <constraints/>
+                    <properties>
+                      <preferredSize width="30" height="30"/>
+                      <text value=""/>
+                      <toolTipText value="Add Step"/>
+                    </properties>
+                  </component>
+                  <component id="bf512" class="javax.swing.JButton" binding="btnDeleteStep">
+                    <constraints/>
+                    <properties>
+                      <preferredSize width="30" height="30"/>
+                      <text value=""/>
+                      <toolTipText value="Delete Step"/>
+                    </properties>
+                  </component>
+                  <component id="86aa" class="javax.swing.JButton" binding="btnSortUp">
+                    <constraints/>
+                    <properties>
+                      <preferredSize width="30" height="30"/>
+                      <text value=""/>
+                      <toolTipText value="Sort Up"/>
+                    </properties>
+                  </component>
+                  <component id="6ed33" class="javax.swing.JButton" binding="btnSortDown">
+                    <constraints/>
+                    <properties>
+                      <preferredSize width="30" height="30"/>
+                      <text value=""/>
+                      <toolTipText value="Sort Down"/>
+                    </properties>
+                  </component>
+                  <component id="5cdec" class="javax.swing.JSeparator">
+                    <constraints/>
+                    <properties>
+                      <orientation value="0"/>
+                      <preferredSize width="25" height="3"/>
+                    </properties>
+                  </component>
+                  <component id="b0be" class="javax.swing.JButton" binding="btnPlayStep">
+                    <constraints/>
+                    <properties>
+                      <preferredSize width="30" height="30"/>
+                      <text value=""/>
+                    </properties>
+                  </component>
+                  <component id="b7d33" class="javax.swing.JButton" binding="btnRefresh">
+                    <constraints/>
+                    <properties>
+                      <preferredSize width="30" height="30"/>
+                      <text value=""/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="f7d62" layout-manager="BorderLayout" hgap="0" vgap="0">
+                <constraints border-constraint="North"/>
+                <properties>
+                  <name value=""/>
+                  <preferredSize width="340" height="100"/>
+                </properties>
+                <border type="none" title="Description:"/>
+                <children>
+                  <component id="b21d7" class="javax.swing.JTextArea" binding="txtDescription">
+                    <constraints border-constraint="Center"/>
+                    <properties>
+                      <lineWrap value="true"/>
+                      <name value="Add description of this feature here. You can you use gherkin format(Given, When, Then...)"/>
+                      <preferredSize width="340" height="100"/>
+                      <toolTipText value="Add description of this feature here. You can you use gherkin format(Given, When, Then...)"/>
+                      <wrapStyleWord value="true"/>
+                    </properties>
+                  </component>
+                  <component id="3b9ab" class="javax.swing.JButton" binding="btnSaveDescription">
+                    <constraints border-constraint="East"/>
+                    <properties>
+                      <preferredSize width="30" height="30"/>
+                      <text value=""/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <scrollpane id="b5e76">
+                <constraints border-constraint="Center"/>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="bf077" class="javax.swing.JList" binding="stepList">
+                    <constraints/>
+                    <properties/>
+                  </component>
+                </children>
+              </scrollpane>
+            </children>
+          </grid>
+          <scrollpane id="45b56">
+            <constraints>
+              <splitpane position="left"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="d2aeb" class="javax.swing.JList" binding="variantList">
+                <constraints/>
+                <properties/>
+              </component>
+            </children>
+          </scrollpane>
+        </children>
+      </splitpane>
+    </children>
+  </grid>
+</form>
