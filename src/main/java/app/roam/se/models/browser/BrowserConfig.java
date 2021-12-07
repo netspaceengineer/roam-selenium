@@ -14,11 +14,11 @@ import java.util.List;
 
 @Data
 public class BrowserConfig {
-    private static final String CONFIG_NAME = "browserName";
-    private static final String BROWSER_TYPE = "browserType";
-    private static final String CHROME_OPTIONS ="chromeOptions";
+    public static final String CONFIG_NAME = "browserName";
+    public static final String BROWSER_TYPE = "browserType";
+    public static final String CHROME_OPTIONS ="chromeOptions";
 
-    private static final String WEBDRIVER_LOCATION = "webDriverLocation";
+    public static final String WEBDRIVER_LOCATION = "webDriverLocation";
     private String configName;
     private String browserType;
     private String webDriverLocation;
@@ -36,6 +36,8 @@ public class BrowserConfig {
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.addArguments(config.chromeOptions);
             driver = new ChromeDriver(chromeOptions);
+        }else if(config.getBrowserType().equals("firefox")){
+            driver =  FirefoxConfig.initializeBrowser(file);
         }
         return  driver;
     }

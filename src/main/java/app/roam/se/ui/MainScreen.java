@@ -6,8 +6,10 @@ import app.roam.se.ui.dialogs.ProjectDialog;
 import app.roam.se.ui.dialogs.ProjectSettingsDialog;
 import app.roam.se.ui.dialogs.TestPlanner;
 import app.roam.se.ui.dialogs.browserconfigs.ChromeConfigDialog;
+import app.roam.se.ui.dialogs.browserconfigs.FirefoxConfigDialog;
 import app.roam.se.ui.misc.Icons;
 import app.roam.se.ui.tabs.JTabbedPaneCloseButton;
+import app.roam.se.ui.views.CustomOutputStream;
 import app.roam.se.utils.FilesUtil;
 import app.roam.se.App;
 import app.roam.se.models.browser.BrowserConfig;
@@ -17,6 +19,7 @@ import app.roam.se.ui.tabs.TestFeatureTab;
 import app.roam.se.ui.tabs.WebEntityTab;
 import app.roam.se.utils.AppUtil;
 import lombok.Data;
+import org.json.JSONObject;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -27,6 +30,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.PrintStream;
 import java.time.Duration;
 
 @Data
@@ -120,10 +124,10 @@ public class MainScreen {
                 TestPlanner.showDialog();
             }
         });
-//        PrintStream printStream = new PrintStream(new CustomOutputStream(txtConsole));
-//
-//        System.setOut(printStream);
-//        System.setErr(printStream);
+        PrintStream printStream = new PrintStream(new CustomOutputStream(txtConsole));
+
+        System.setOut(printStream);
+        System.setErr(printStream);
     }
 
     public void refreshUI() {
@@ -151,7 +155,15 @@ public class MainScreen {
                         } else if (!path.getName().endsWith("Test Cases") && path.getAbsolutePath().contains("Test Cases") && new File(path.getAbsolutePath() + "/default.json").exists()) {
                             showTab(path.getName(), Icons.testCase, new TestCaseTab(path.getAbsolutePath()).getMainPanel());
                         } else if (path.getName().contains(".json") && path.getAbsolutePath().contains("Browsers")) {
-                            ChromeConfigDialog.showDialog(false, path.getAbsolutePath());
+
+                            String raw = FilesUtil.readFile(path.getAbsolutePath());
+                            JSONObject object = new JSONObject(raw);
+                            String typ = object.getString(BrowserConfig.BROWSER_TYPE);
+                            if (typ.equals("chrome")) {
+                                ChromeConfigDialog.showDialog(false, path.getAbsolutePath());
+                            } else if (typ.equals("firefox")) {
+                                FirefoxConfigDialog.showDialog(false, path.getAbsolutePath());
+                            }
                         }
 
                     }
@@ -266,4 +278,5 @@ public class MainScreen {
     public JComponent $$$getRootComponent$$$() {
         return mainpanel;
     }
+
 }
