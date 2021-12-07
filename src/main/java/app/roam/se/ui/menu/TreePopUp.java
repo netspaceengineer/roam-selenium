@@ -1,9 +1,11 @@
 package app.roam.se.ui.menu;
 
+import app.roam.se.models.browser.BrowserConfig;
 import app.roam.se.models.test.TestCase;
 import app.roam.se.ui.MainScreen;
 import app.roam.se.ui.common.UIUtil;
 import app.roam.se.ui.dialogs.browserconfigs.ChromeConfigDialog;
+import app.roam.se.ui.dialogs.browserconfigs.FirefoxConfigDialog;
 import app.roam.se.ui.misc.Icons;
 import app.roam.se.ui.tabs.TestFeatureTab;
 import app.roam.se.utils.FilesUtil;
@@ -12,6 +14,7 @@ import app.roam.se.models.test.TestStep;
 import app.roam.se.models.test.WebEntity;
 import app.roam.se.ui.dialogs.WebEntityDialog;
 import app.roam.se.ui.tabs.WebEntityTab;
+import org.json.JSONObject;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -229,7 +232,12 @@ public class TreePopUp extends JPopupMenu {
                     ChromeConfigDialog.showDialog(true,f.getAbsolutePath());
                 }
             });
-            addMenuItem("New Firefox...(WIP)",null);
+            addMenuItem("New Firefox Config...", new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    FirefoxConfigDialog.showDialog(true,f.getAbsolutePath());
+                }
+            });
             addMenuItem("New IE Config...(WIP)",null);
             addMenuItem("New Edge Config...(WIP)",null);
             addSeparator();
@@ -238,7 +246,14 @@ public class TreePopUp extends JPopupMenu {
             addMenuItem("Open", new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    ChromeConfigDialog.showDialog(false,f.getAbsolutePath());
+                    String raw = FilesUtil.readFile(f.getAbsolutePath());
+                    JSONObject object = new JSONObject(raw);
+                    String typ= object.getString(BrowserConfig.BROWSER_TYPE);
+                    if(typ.equals("chrome")) {
+                        ChromeConfigDialog.showDialog(false, f.getAbsolutePath());
+                    }else if(typ.equals("firefox")){
+                        FirefoxConfigDialog.showDialog(false,f.getAbsolutePath());
+                    }
                 }
             });
             addMenuItem("Delete", new ActionListener() {
