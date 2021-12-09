@@ -20,6 +20,7 @@ public class TestRunner {
     private WebDriver driver;
     private TestCase testcase;
     private String variant;
+
     @BeforeTest(alwaysRun=true)
     @Parameters({"testCase","browserConfig", "variant"})
     public void setUp(String testCase, String browserConfig, String variant) {

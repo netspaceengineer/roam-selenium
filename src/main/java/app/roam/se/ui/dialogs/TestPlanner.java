@@ -1,5 +1,6 @@
 package app.roam.se.ui.dialogs;
 
+import app.roam.se.ui.common.Loader;
 import app.roam.se.ui.misc.Icons;
 import app.roam.se.ui.misc.Theme;
 import app.roam.se.utils.FilesUtil;
@@ -154,8 +155,29 @@ public class TestPlanner extends JDialog {
                 FilesUtil.generateTestCaseSuite("Test" + TimeUtil.getTimeStamp(), testCaseNames, browser, c.getName());
             }
         }
-        new TestInitiator().initializeTest();
-        dispose();
+        setVisible(false);
+        Loader loader = new Loader("Test in progress");
+        SwingWorker worker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                new TestInitiator().initializeTest();
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                loader.dispose();
+                super.done();
+                dispose();
+            }
+        };
+        worker.execute();
+
+
+
+
+
+
     }
 
     private ListCellRenderer renderer = new ListCellRenderer() {

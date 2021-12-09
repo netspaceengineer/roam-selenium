@@ -6,7 +6,7 @@
 
     <groupId>app.roam.se</groupId>
     <artifactId>release</artifactId>
-    <version>H1-Protium</version>
+    <version>H1-Protium-v1.0.1</version>
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>

@@ -125,7 +125,6 @@ public class MainScreen {
             }
         });
         PrintStream printStream = new PrintStream(new CustomOutputStream(txtConsole));
-
         System.setOut(printStream);
         System.setErr(printStream);
     }

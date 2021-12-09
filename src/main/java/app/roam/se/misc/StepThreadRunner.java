@@ -5,7 +5,9 @@ import app.roam.se.models.test.Executor;
 import app.roam.se.models.test.TestStep;
 import org.openqa.selenium.WebDriver;
 
-public class StepThreadRunner implements Runnable {
+import javax.swing.*;
+
+public class StepThreadRunner extends SwingWorker {
     private WebDriver driver;
     private TestStep testStep;
     private String variant;
@@ -14,9 +16,13 @@ public class StepThreadRunner implements Runnable {
         this.testStep = testStep;
         this.variant = variant;
     }
+
     @Override
-    public void run() {
+    protected Object doInBackground() throws Exception {
         Result res = new Executor(driver,testStep, variant).execute();
         System.out.println(res.getResult());
+        return null;
     }
+
+
 }
