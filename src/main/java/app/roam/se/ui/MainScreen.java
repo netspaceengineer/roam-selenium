@@ -1,5 +1,6 @@
 package app.roam.se.ui;
 
+import app.roam.se.models.reports.Report;
 import app.roam.se.ui.common.UIUtil;
 import app.roam.se.ui.dialogs.DatabaseDialog;
 import app.roam.se.ui.dialogs.ProjectDialog;
@@ -8,15 +9,12 @@ import app.roam.se.ui.dialogs.TestPlanner;
 import app.roam.se.ui.dialogs.browserconfigs.ChromeConfigDialog;
 import app.roam.se.ui.dialogs.browserconfigs.FirefoxConfigDialog;
 import app.roam.se.ui.misc.Icons;
-import app.roam.se.ui.tabs.JTabbedPaneCloseButton;
+import app.roam.se.ui.tabs.*;
 import app.roam.se.ui.views.CustomOutputStream;
 import app.roam.se.utils.FilesUtil;
 import app.roam.se.App;
 import app.roam.se.models.browser.BrowserConfig;
 import app.roam.se.ui.menu.TreePopUp;
-import app.roam.se.ui.tabs.TestCaseTab;
-import app.roam.se.ui.tabs.TestFeatureTab;
-import app.roam.se.ui.tabs.WebEntityTab;
 import app.roam.se.utils.AppUtil;
 import lombok.Data;
 import org.json.JSONObject;
@@ -163,6 +161,10 @@ public class MainScreen {
                             } else if (typ.equals("firefox")) {
                                 FirefoxConfigDialog.showDialog(false, path.getAbsolutePath());
                             }
+                        } else if (path.getName().contains(".json") && path.getAbsolutePath().contains("Results")) {
+                            Report report = new Report();
+                            report.loadReport(path.getAbsolutePath());
+                            showTab(path.getName(), Icons.result, new ReportTab(report).mainPanel);
                         }
 
                     }

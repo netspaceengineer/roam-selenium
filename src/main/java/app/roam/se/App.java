@@ -1,5 +1,6 @@
 package app.roam.se;
 
+import app.roam.se.models.reports.Report;
 import app.roam.se.ui.MainScreen;
 import app.roam.se.ui.misc.Icons;
 import app.roam.se.models.test.TestProject;
@@ -16,13 +17,13 @@ public class App {
     public static TestProject testProject;
     public static WebDriver webDriver;
     public static boolean isRunning=false;
-
+    public static Report report;
     public static void main(String[] args){
         SwingUtilities.invokeLater(() ->  {
             try {
                 testProject = AppUtil.getProjectDetails();
                 testProject.initialize();
-                JFrame frame = new JFrame("Selenium Forms");
+                JFrame frame = new JFrame("ROAM Test IDE");
                 frame.setContentPane(new MainScreen(frame).getMainpanel());
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setIconImage(Icons.getLogo());

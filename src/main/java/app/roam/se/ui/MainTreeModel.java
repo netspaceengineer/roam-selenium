@@ -37,6 +37,9 @@ public class MainTreeModel implements TreeModel {
                     return null;
             }
         } else {
+            if(fParent.getAbsolutePath().equals(App.testProject.getLocation()+ "\\Results")){
+                return FilesUtil.getJSONFiles(fParent.getAbsolutePath()).get(index);
+            }
            return FilesUtil.getViewableFiles(((File) parent).getAbsolutePath()).get(index);
 
         }
@@ -49,6 +52,9 @@ public class MainTreeModel implements TreeModel {
         if(fParent.getAbsolutePath().equals(App.testProject.getLocation())){
             return 7;
         }else if (fParent.isDirectory()) {
+            if(fParent.getAbsolutePath().equals(App.testProject.getLocation()+ "\\Results")){
+                return FilesUtil.getJSONFiles(fParent.getAbsolutePath()).size();
+            }
             return FilesUtil.getViewableFiles(((File) parent).getAbsolutePath()).size();
         }
         return 0;

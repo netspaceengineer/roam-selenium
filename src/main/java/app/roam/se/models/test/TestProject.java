@@ -30,6 +30,7 @@ public class TestProject {
     private LinkedHashMap<String, String> drivers = new LinkedHashMap<String,String>();
     private String location="";
     private String currentVariant ="default";
+
     public static boolean createProject(String name, String path){
         try{
             JSONObject object = new JSONObject();
@@ -117,7 +118,9 @@ public class TestProject {
         FilesUtil.checkFolder(location+"/Test Groups");
         FilesUtil.checkFolder(location+"/Test Cases");
         FilesUtil.checkFolder(location+"/Browsers");
-        FilesUtil.checkFolder(location+"/Result");
+        FilesUtil.checkFolder(location+"/Results");
+        FilesUtil.checkFolder(location+"/Suites");
+        FilesUtil.checkFolder(location+"/Profiles");
         FilesUtil.checkFolder(location+"/Resources");
         DBUtil.getConnection();
     }
