@@ -5,16 +5,36 @@ import app.roam.se.App;
 import app.roam.se.models.test.exceptions.TestFailureException;
 import app.roam.se.models.test.webentities.*;
 
+import app.roam.se.utils.TimeUtil;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+
+import java.io.File;
+import java.io.IOException;
 
 public class Executor {
     private WebDriver driver;
     private TestStep testStep;
     private String variant;
+
     public Executor(WebDriver driver, TestStep testStep, String variant) {
         this.driver = driver;
         this.testStep = testStep;
-        this.variant=variant;
+        this.variant = variant;
+    }
+
+    public String getScreenshot() {
+        try {
+            File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            String screenshotPath = App.testProject.getLocation() + "/Results/screenshots/" + "scr_" + TimeUtil.getTimeStamp() + ".jpg";
+            FileUtils.copyFile(scrFile, new File(screenshotPath));
+            return screenshotPath;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     public Result execute() {
@@ -65,7 +85,7 @@ public class Executor {
                     return new TextBox(driver, entity.getName(), entity.getLocation()).appendText(testStep.getData());
             }
             return new Result(entity.getName(), new TestFailureException("Unknown test command!"));
-        }catch (Exception ex){
+        } catch (Exception ex) {
             return new Result(entity.getName(), new TestFailureException(ex.getMessage()));
         }
     }

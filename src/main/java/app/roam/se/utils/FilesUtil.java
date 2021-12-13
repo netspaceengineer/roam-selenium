@@ -75,6 +75,16 @@ public class FilesUtil {
         };
         return listOfFiles;
     }
+
+    public static List<File> getJSONFiles(String path){
+        List<File> listOfFiles = new ArrayList<File>();
+        for(File f:getFiles(path)) {
+            if(f.getAbsolutePath().endsWith(".json") ) {
+                listOfFiles.add(f);
+            }
+        };
+        return listOfFiles;
+    }
     public static List<File> getListFiles(String path){
         List<File> listOfFiles = new ArrayList<File>();
         for(File f:getFiles(path)) {

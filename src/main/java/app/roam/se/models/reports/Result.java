@@ -1,18 +1,32 @@
 package app.roam.se.models.reports;
 
+import lombok.Data;
+import org.json.JSONObject;
+
 
 public class Result {
+    private static final String STEP_DESCRIPTION ="step";
+    private static final String STEP_STATUS = "status";
+    private static final String STEP_SCREENSHOT = "screenshot";
+    public String screenshot;
     public boolean isPassed;
     private String action = "";
     private String noun = "";
     private String data = "";
     private Exception[] exception;
-
+    private String statement=null;
     public Result(String action, String noun, String data) {
         this.isPassed = true;
         this.action = action;
         this.noun = noun;
         this.data = data;
+    }
+
+    public Result(JSONObject object){
+        statement = object.getString(STEP_DESCRIPTION);
+        isPassed = object.getString(STEP_STATUS).equals("PASSED");
+        screenshot = object.getString(STEP_SCREENSHOT);
+
     }
 
     public Result(String action, Exception... ex) {
@@ -27,6 +41,9 @@ public class Result {
 
 
     public String getStatement() {
+        if(statement!=null){
+            return statement;
+        }
         String verb = action.toUpperCase();
         switch (action.toLowerCase()) {
 
@@ -57,5 +74,13 @@ public class Result {
             default:
                 return String.format("%s %s.", verb, noun);
         }
+    }
+
+    public JSONObject getJSONObject(){
+        JSONObject object = new JSONObject();
+        object.put(STEP_DESCRIPTION,getStatement());
+        object.put(STEP_STATUS,isPassed?"PASSED":"FAILED");
+        object.put(STEP_SCREENSHOT,screenshot);
+        return object;
     }
 }
